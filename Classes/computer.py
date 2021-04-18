@@ -37,15 +37,168 @@ class Computer(Player):
                     else:
                         if (bluff()):  #bluff call
                             return amt_to_stay_in
-                        
-            
+                        else:
+                            return -1 #fold
             else: 
                 return -1
+        else:
+            if len(self.board_cards) == 3: #flop
+                if (bluff()):
+                    return amt_to_stay_in * 2.25
+                else:
+                    if self.hand_num == 0:
+                        if amt_to_stay_in > 0:
+                            return -1
+                        else:
+                            return 0 #check
+                    if self.hand_num == 1:
+                        if(bluff()):
+                            return amt_to_stay_in * 2
+                        else: 
+                            if amt_to_stay_in > 0:
+                                return -1
+                            else:
+                                return 0 
+                    if self.hand_num == 2:
+                        if(bluff()):
+                            return self.stack
+                        else:
+                            if amt_to_stay_in > 0:
+                                return amt_to_stay_in * 2
+                            else: 
+                                return amt_to_stay_in * 1.5
+                    if self.hand_num == 3:
+                        if(bluff()):
+                            return amt_to_stay_in * 3
+                        else:
+                            if amt_to_stay_in > 0:
+                                return amt_to_stay_in 
+                            else:
+                                return amt_to_stay_in * 1.5
+                    if self.hand_num == 4:
+                        if(bluff()):
+                            return amt_to_stay_in * 2
+                        else:
+                            if amt_to_stay_in > 0:
+                                return amt_to_stay_in
+                            else:
+                                return 0
+                    if self.hand_num > 4:
+                        return amt_to_stay_in
             
-                
+            if len(self.board_cards) == 4: #turn
+                if self.hand_num == 0:
+                    if amt_to_stay_in > 0:
+                        return -1
+                    else:
+                        return 0
+                if self.hand_num == 1:
+                    if(bluff()):
+                        return amt_to_stay_in * 2
+                    else:
+                        if amt_to_stay_in > 0:
+                            if random.random() > .7:
+                                return amt_to_stay_in
+                            else:
+                                return -1
+                        else:
+                            return 0
+                if self.hand_num == 2:
+                    if(bluff()):
+                        return amt_to_stay_in * 2
+                    else:
+                        if amt_to_stay_in > 0:
+                            return amt_to_stay_in
+                        else:
+                            return 0
+                if self.hand_num == 3:
+                    if(bluff()):
+                        return amt_to_stay_in * 2.5
+                    else:
+                        if amt_to_stay_in > 0:
+                            return amt_to_stay_in
+                        else:
+                            return 0
+                if self.hand_num == 4:
+                    if(bluff()):
+                        return 0
+                    else:
+                        if amt_to_stay_in > 0:
+                            return amt_to_stay_in * 2
+                        else:
+                            return amt_to_stay_in * 1.5
+                if self.hand_num == 5:
+                    if(bluff()):
+                        return self.stack
+                    else:
+                        if amt_to_stay_in > 0:
+                            return amt_to_stay_in * 2
+                        else:
+                            return 0
+                if self.hand_num > 5:
+                    if(bluff()):
+                        return self.stack
+                    else:
+                        return 0
+            if len(self.boad_cards) == 5:
+                if self.hand_num == 0:
+                    if(bluff()):
+                        return self.stack
+                    else:
+                        if amt_to_stay_in > 0:
+                            return -1
+                        else:
+                            return 0
 
-
-
+                if self.hand_num == 1:
+                    if(bluff()):
+                        return amt_to_stay_in * 2
+                    else:
+                        if amt_to_stay_in > 0:
+                            if random.random() > 0.6:
+                                return amt_to_stay_in
+                            else:
+                                return -1
+                        else:
+                            return 0
+                if self.hand_num == 2: 
+                    if(bluff()):
+                        return self.stack
+                    else:
+                        if amt_to_stay_in > 0:
+                            return amt_to_stay_in
+                        else:
+                            return 0
+                if self.hand_num == 3:
+                    if(bluff()):
+                        return amt_to_stay_in * 2
+                    else:
+                        if amt_to_stay_in > 0:
+                            return amt_to_stay_in
+                        else: 
+                            return 0
+                if self.hand_num == 4:
+                    if(bluff()):
+                        return self.stack
+                    else:
+                        if amt_to_stay_in > 0:
+                            return amt_to_stay_in
+                        else: 
+                            return amt_to_stay_in * 3
+                if self.hand_num == 5:
+                    if(bluff()):
+                        return self.stack
+                    else:
+                        if amt_to_stay_in > 0: 
+                            return amt_to_stay_in * 3
+                        else:
+                            return amt_to_stay_in * 2
+                if self.hand_num > 5:
+                    if(bluff()):
+                        return 0
+                    else:
+                        return self.stack
+                        
     def pre_flop_fold(self, curr_bet, prev_bet):
         #returns true if folding
         #false if elsewise
@@ -72,8 +225,9 @@ class Computer(Player):
                     return False
                 else:
                     return True
-
- '''   def determineOutcome():
+            
+    '''
+    def determineOutcome():
         cutoff = 0.5
         if self.hand_num > self.hand_num_board:
             cutoff = cutoff + 0.1
@@ -82,7 +236,9 @@ class Computer(Player):
                 '''
 
     def bluff():
-        if random.random() > 0.8:
+        if random.random() > 0.7:
             return True
         else:
             return False
+
+    
